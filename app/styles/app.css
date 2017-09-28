@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  background: black;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+#controls {
+  position: fixed;
+  top: 0px;
+}
