@@ -1,3 +1,10 @@
-<div id="controls">
-  <button {{action "togglePlay"}}>{{playToggleLabel}}</button>
+<div id="top-controls">
+  <button class="{{if playing "red" "green"}}" {{action "togglePlay"}}>{{if playing "stop" "play"}}</button>
+  <button class="blue" {{action "pause"}}>pause</button>
+</div>
+
+<div id="bottom-controls">
+  {{#each bufferList as |buffer|}}
+    {{track-control}}
+  {{/each}}
 </div>

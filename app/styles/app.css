@@ -3,12 +3,43 @@ body {
   background: black;
 }
 
+button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+button.blue {
+  background-color: #008CBA;
+}
+
+button.green {
+  background-color: #4CAF50; /* Green */
+}
+
+button.red {
+  background-color: #f44336;
+}
+
 canvas {
   width: 100%;
   height: 100%;
 }
 
-#controls {
+#top-controls {
   position: fixed;
   top: 0px;
+}
+
+#bottom-controls {
+  position: fixed;
+  bottom: 0px;
+}
+
+.track-control-wrapper {
+  display: inline;
 }

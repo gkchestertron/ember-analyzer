@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const NUM_CUBES   = 48
+const NUM_CUBES   = 32
 const COLOR       = 0xcc0000
 const OFFSET      = -5
 const TOTAL_WIDTH = 10
@@ -15,7 +15,10 @@ export default Ember.Component.extend({
    */
   init() {
     window.AudioContext = window.AudioContext || window.webkitAudioContext
-    this.audioCtx = new AudioContext()
+    this.audioCtx  = new AudioContext()
+    this.pausedAt  = 0
+    this.startedAt = 0
+    this.set('playing', false)
 
     let bufferLoader = new BufferLoader(
       this.audioCtx,
@@ -25,7 +28,7 @@ export default Ember.Component.extend({
         './samples/vocal.mp3',
       ],
       (bufferList) => {
-        this.bufferList = bufferList
+        this.set('bufferList', bufferList)
         let { analyserNode, merger } = buildAudioPath(bufferList.length, this.audioCtx)
         createVisualizer(analyserNode)
         this.merger = merger
@@ -37,11 +40,24 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    pause() {
+      // stop them!
+      this.tracks.forEach(track => track.stop(0))
+
+      // track time
+      this.pausedAt = this.audioCtx.currentTime - this.startedAt;
+
+      // set playToggleLabel
+      this.set('playing', false)
+    },
+
     /**
      * plays all the tracks from the beginning
      */
     togglePlay() {
-      if (this.playToggleLabel === 'play') {
+      if (!this.playing) {
+        let offset = this.pausedAt
+
         // create the tracks
         this.tracks = createTracks(this.bufferList, this.audioCtx)
 
@@ -49,22 +65,30 @@ export default Ember.Component.extend({
         this.tracks.forEach(track => track.connect(this.merger))
         
         // start em up
-        this.tracks.forEach(track => track.start(0))
+        this.tracks.forEach(track => track.start(0, offset))
+
+        // track time
+        this.startedAt = this.audioCtx.currentTime - offset;
+        this.pausedAt = 0;
 
         // set playToggleLabel
-        this.set('playToggleLabel', 'stop')
+        this.set('playing', true)
       }
       else {
         // stop them!
         this.tracks.forEach(track => track.stop(0))
 
+        // track time
+        this.startedAt = 0;
+        this.pausedAt = 0;
+
         // set playToggleLabel
-        this.set('playToggleLabel', 'play')
+        this.set('playing', false)
       }
     }
   },
 
-  playToggleLabel: 'play'
+  playing: false
 });
 
 /**
@@ -122,12 +146,8 @@ function createVisualizer(analyserNode) {
   var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 )
   scene.add(light)
 
-  let canvas = document.getElementsByTagName('canvas')[0]
-  if (canvas)
-    canvas.remove()
-
   var renderer = new THREE.WebGLRenderer()
-  renderer.setSize( window.innerWidth, window.innerHeight )
+  renderer.setSize( window.innerWidth - 10, window.innerHeight -10 )
   document.body.appendChild( renderer.domElement )
 
   let cubes = addCubes(analyserNode, scene)
@@ -146,7 +166,7 @@ function addCubes(analyserNode, scene) {
 
   for (let i = 0; i < NUM_CUBES; i++) {
     let offset = OFFSET + (i * WIDTH)
-    cubes.push(addCube(scene, offset, WIDTH, COLOR, i))
+    cubes.push(addCube(scene, offset, WIDTH/1.5, COLOR, i))
   }
 
   return cubes
@@ -179,6 +199,6 @@ function updateCubes(analyserNode, cubes) {
 }
 
 function updateCube(cube, value, freq) {
-  cube.position.y = (value/255) * 3
-  cube.rotation.y += 0.1
+  cube.scale.y = (value/255) * 20 + 0.5
+  cube.rotation.y += 0.05
 }
