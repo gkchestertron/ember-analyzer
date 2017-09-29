@@ -277,6 +277,7 @@ function createVisualizer(audioCtx, analyserNode, camera, buffer, pointers) {
  */
 function updateTrackingCube(currentTime, duration, pointers, trackingCube) {
   trackingCube.rotation.y += ROTATION_RATE * 2
+  trackingCube.rotation.x += ROTATION_RATE
 
   let position = (currentTime - pointers.startedAt)
 
