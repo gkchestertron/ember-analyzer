@@ -61,6 +61,21 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    /**
+     * fast forwards the tracks
+     */
+    fastForward() {
+      this.actions.pause.call(this)
+
+      // move pointer back
+      this.pointers.pausedAt += 10
+
+      // make sure it's not before the start
+      if (this.pointers.pausedAt > this.bufferList[0].duration)
+        this.pointers.pausedAt = this.bufferList[0].duration
+
+      this.play()
+    },
 
     /**
      * plays all the tracks from the beginning
@@ -90,6 +105,22 @@ export default Ember.Component.extend({
 
       // set playToggleLabel
       this.set('pointers.playing', false)
+    },
+
+    /**
+     * rewinds the tracks
+     */
+    rewind() {
+      this.actions.pause.call(this)
+
+      // move pointer back
+      this.pointers.pausedAt -= 10
+
+      // make sure it's not before the start
+      if (this.pointers.pausedAt < 0)
+        this.pointers.pausedAt = 0
+
+      this.play()
     },
 
     /**
