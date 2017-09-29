@@ -1,7 +1,7 @@
 # ember-analyzer
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is a toy app that shows a simple integration of three.js with the Web Audio API, using the Tuna.js library for fx, built on top of Ember.
+A live demo is available [right here](https://gkchestertron.github.io/ember-analyzer/).
 
 ## Prerequisites
 
