@@ -1,3 +1,11 @@
+#advice {
+  color: white;
+  position: fixed;
+  font-weight: lighter;
+  top: -15px;
+  right: 20px;
+}
+
 body {
   margin: 0;
   background: black;

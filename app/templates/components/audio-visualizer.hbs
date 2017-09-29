@@ -1,6 +1,8 @@
 <div id="top-controls">
   <button {{action "rewind"}}>&lt;&lt;</button>
-  <button class="{{if pointers.playing "red" "green"}}" {{action "togglePlay"}}>{{if pointers.playing "stop" "play"}}</button>
+  <button 
+    class="{{if pointers.playing "red" "green"}}" 
+    {{action "togglePlay"}}>{{if pointers.playing "stop" "play"}}</button>
   <button class="blue" {{action "pause"}}>pause</button>
   <button {{action "fastForward"}}>&gt;&gt;</button>
 </div>
@@ -10,3 +12,5 @@
     {{track-control fx=f idx=index sliderChanged="sliderChanged"}}
   {{/each}}
 </div>
+
+<h1 id="advice">just play...</h1>
