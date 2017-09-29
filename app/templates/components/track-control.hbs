@@ -1,1 +1,5 @@
-<button>track</button>
+<button class="fx">track {{sum idx 1}}</button>
+{{range-slider start=50 on-slide="sliderChanged"}}
+{{#each fx as |f jdx|}}
+  <button class="fx {{if f.bypass "" "red"}}" {{action "activatePedal" f jdx}}>{{f.name}}</button>
+{{/each}}

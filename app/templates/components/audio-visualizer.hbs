@@ -1,10 +1,10 @@
 <div id="top-controls">
-  <button class="{{if playing "red" "green"}}" {{action "togglePlay"}}>{{if playing "stop" "play"}}</button>
+  <button class="{{if pointers.playing "red" "green"}}" {{action "togglePlay"}}>{{if pointers.playing "stop" "play"}}</button>
   <button class="blue" {{action "pause"}}>pause</button>
 </div>
 
 <div id="bottom-controls">
-  {{#each bufferList as |buffer|}}
-    {{track-control}}
+  {{#each fx as |f index|}}
+    {{track-control fx=f idx=index sliderChanged="sliderChanged"}}
   {{/each}}
 </div>

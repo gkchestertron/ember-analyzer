@@ -10,6 +10,7 @@ module.exports = function(defaults) {
 
   app.import('vendor/BufferLoader.js')
   app.import('vendor/three.min.js')
+  app.import('vendor/tuna.js')
 
   // Use `app.import` to add additional libraries to the generated
   // output files.
