@@ -823,6 +823,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("ember-analyzer/app")["default"].create({"name":"ember-analyzer","version":"0.0.0+695f7a00"});
+  require("ember-analyzer/app")["default"].create({"name":"ember-analyzer","version":"0.0.0+d8af41b7"});
 }
 //# sourceMappingURL=ember-analyzer.map
