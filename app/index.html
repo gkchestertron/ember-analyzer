@@ -9,16 +9,16 @@
 
     {{content-for "head"}}
 
-    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
-    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/ember-analyzer.css">
+    <link integrity="" rel="stylesheet" href="{{baseURL}}assets/vendor.css">
+    <link integrity="" rel="stylesheet" href="{{baseURL}}assets/ember-analyzer.css">
 
     {{content-for "head-footer"}}
   </head>
   <body>
     {{content-for "body"}}
 
-    <script src="{{rootURL}}assets/vendor.js"></script>
-    <script src="{{rootURL}}assets/ember-analyzer.js"></script>
+    <script src="{{baseURL}}/assets/vendor.js"></script>
+    <script src="{{baseURL}}/assets/ember-analyzer.js"></script>
 
     {{content-for "body-footer"}}
   </body>
