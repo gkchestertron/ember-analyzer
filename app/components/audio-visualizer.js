@@ -36,22 +36,22 @@ export default Ember.Component.extend({
     },
 
     /**
-     * plays all the tracks from the beginning
+     * play or pause track depending on state
      */
     togglePlay() {
       if (!this.get('audioCtx.playing')) {
         this.get('audioCtx').play()
       }
       else {
-        this.get('audioCtx').stop()
+        this.get('audioCtx').pause()
       }
     },
 
     /**
-     * pause playback if it's playing
+     * stop playback
      */
-    pause() {
-      this.get('audioCtx').pause()
+    stop() {
+      this.get('audioCtx').stop()
     },
 
     /**
