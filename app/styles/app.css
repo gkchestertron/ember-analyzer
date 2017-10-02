@@ -78,7 +78,7 @@ canvas {
 .loader {
   color: #ffffff;
   text-indent: -9999em;
-  margin: 30% auto 10% auto;
+  margin: 15% auto 5% auto;
   position: relative;
   font-size: 20px;
   -webkit-transform: translateZ(0);
