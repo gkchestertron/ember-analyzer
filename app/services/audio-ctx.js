@@ -176,7 +176,7 @@ function buildAudioPath(numChannels, audioCtx) {
 
   // main gain
   let mainGain = audioCtx.createGain()
-  mainGain.gain.value = 2
+  mainGain.gain.value = 1.5
 
   // build the path
   fx.forEach((chain, idx) => {
