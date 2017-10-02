@@ -1,14 +1,14 @@
 <div id="top-controls">
   <button {{action "rewind"}}>&lt;&lt;</button>
   <button 
-    class="{{if pointers.playing "red" "green"}}" 
-    {{action "togglePlay"}}>{{if pointers.playing "stop" "play"}}</button>
+    class="{{if audioCtx.playing "red" "green"}}" 
+    {{action "togglePlay"}}>{{if audioCtx.playing "stop" "play"}}</button>
   <button class="blue" {{action "pause"}}>pause</button>
   <button {{action "fastForward"}}>&gt;&gt;</button>
 </div>
 
 <div id="bottom-controls">
-  {{#each fx as |f index|}}
+  {{#each audioCtx.fx as |f index|}}
     {{track-control fx=f idx=index sliderChanged="sliderChanged"}}
   {{/each}}
 </div>
