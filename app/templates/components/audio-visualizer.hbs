@@ -1,17 +1,18 @@
 {{#if loading}}
   {{loading-bars}}
-{{/if}}
-<div id="top-controls">
-  <button {{action "rewind"}}>&lt;&lt;</button>
-  <button 
-    class="{{if audioCtx.playing "blue" "green"}}" 
-    {{action "togglePlay"}}>{{if audioCtx.playing "pause" "play"}}</button>
-  <button class="red" {{action "stop"}}>stop</button>
-  <button {{action "fastForward"}}>&gt;&gt;</button>
-</div>
+{{else}}
+  <div id="top-controls">
+    <button {{action "rewind"}}>&lt;&lt;</button>
+    <button 
+      class="{{if audioCtx.playing "blue" "green"}}" 
+      {{action "togglePlay"}}>{{if audioCtx.playing "pause" "play"}}</button>
+    <button class="red" {{action "stop"}}>stop</button>
+    <button {{action "fastForward"}}>&gt;&gt;</button>
+  </div>
 
-<div id="bottom-controls">
-  {{#each audioCtx.fx as |f index|}}
-    {{track-control fx=f audioCtx=audioCtx idx=index sliderChanged="sliderChanged"}}
-  {{/each}}
-</div>
+  <div id="bottom-controls">
+    {{#each audioCtx.fx as |f index|}}
+      {{track-control fx=f audioCtx=audioCtx idx=index sliderChanged="sliderChanged"}}
+    {{/each}}
+  </div>
+{{/if}}
