@@ -23,7 +23,10 @@ export default Ember.Component.extend({
 
       // create the visualizer and append it to the body
       this.set('visualizer', Ember.inject.service('visualizer'))
-      document.body.appendChild(this.get('visualizer.el'))
+      this.set('loading', false)
+      setTimeout(() => {
+        document.body.appendChild(this.get('visualizer.el'))
+      }, 100)
     })
   },
 
@@ -76,6 +79,11 @@ export default Ember.Component.extend({
    * audio service
    */
   audioCtx: Ember.inject.service('audio-ctx'),
+
+  /**
+   * loading flag
+   */
+  loading: true,
 
   /**
    * visualizer service
