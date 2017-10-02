@@ -9,7 +9,7 @@
 
 <div id="bottom-controls">
   {{#each audioCtx.fx as |f index|}}
-    {{track-control fx=f idx=index sliderChanged="sliderChanged"}}
+    {{track-control fx=f audioCtx=audioCtx idx=index sliderChanged="sliderChanged"}}
   {{/each}}
 </div>
 

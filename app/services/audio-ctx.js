@@ -162,11 +162,6 @@ function buildAudioPath(numChannels, audioCtx) {
   // create and connect the gain nodes
   let gains = Array(numChannels).fill().map((v,i) => {
     let gain = audioCtx.createGain()
-
-    if (i === 2)
-      gain.gain.value = 2 // ugly hack for bad vocal track volume
-    else
-      gain.gain.value = 0.5
     return gain
   })
 
@@ -176,6 +171,10 @@ function buildAudioPath(numChannels, audioCtx) {
       return new tuna[name](fxDefs[name])
     })
   })
+
+  // main gain
+  let mainGain = audioCtx.createGain()
+  mainGain.gain.value = 2
 
   // build the path
   fx.forEach((chain, idx) => {
@@ -188,7 +187,8 @@ function buildAudioPath(numChannels, audioCtx) {
     chain[chain.length - 1].connect(gains[idx])
     gains[idx].connect(merger)
   })
-  merger.connect(analyserNode)
+  merger.connect(mainGain)
+  mainGain.connect(analyserNode)
   analyserNode.connect(audioCtx.destination)
 
   return { fx, gains, merger, analyserNode }

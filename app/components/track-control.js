@@ -2,7 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['track-control-wrapper'],
+
   sliderRange: { min: 0, max: 100 },
+
+  gainValue: Ember.computed(function () {
+    return this.get('audioCtx.gains')[this.get('idx')].gain.value*50
+  }),
+
   actions: {
     activatePedal(pedal, idx) {
       if (pedal.bypass)
@@ -19,4 +25,4 @@ export default Ember.Component.extend({
       this.sendAction('sliderChanged', value, this.idx)
     }
   }
-});
+})

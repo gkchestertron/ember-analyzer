@@ -134,6 +134,23 @@ function createCube(offset, width, color) {
 }
 
 /**
+ * updates the properties of a cube
+ * @private
+ * @param {THREE.Mesh} cube - cube mesh to update
+ * @param {number} value - value to use for update
+ * @param {boolean} clockwise - direction for rotation
+ */
+function updateCube(cube, value, clockwise) {
+  cube.scale.y = (value/255) * SCALE + INITIAL_HEIGHT
+  // cube.material.color.setHex(cube.material.color + 1)
+
+  if (clockwise)
+    cube.rotation.y += ROTATION_RATE
+  else
+    cube.rotation.y -= ROTATION_RATE
+}
+
+/**
  * updates a list of cubes, given an analyserNode
  * @private
  * @param {AnalyserNode} analyserNode
@@ -152,20 +169,4 @@ function updateCubes(analyserNode, cubes) {
 
     updateCube(cube, avg, i % 2 === 0)
   }
-}
-
-/**
- * updates the properties of a cube
- * @private
- * @param {THREE.Mesh} cube - cube mesh to update
- * @param {number} value - value to use for update
- * @param {boolean} clockwise - direction for rotation
- */
-function updateCube(cube, value, clockwise) {
-  cube.scale.y = (value/255) * SCALE + INITIAL_HEIGHT
-
-  if (clockwise)
-    cube.rotation.y += ROTATION_RATE
-  else
-    cube.rotation.y -= ROTATION_RATE
 }
