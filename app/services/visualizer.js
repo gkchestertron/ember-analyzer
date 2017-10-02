@@ -15,6 +15,11 @@ const TRACKING_COLOR = 0xdd00ee
 const WIDTH          = TOTAL_WIDTH/NUM_CUBES
 
 export default Ember.Service.extend({
+  /**
+   * create the scene/camera
+   * make all the cubes
+   * setup the animation
+   */
   init() {
     // get the audio context
     let audioCtx = this.get('audioCtx')
@@ -35,7 +40,7 @@ export default Ember.Service.extend({
     renderer.setSize(window.innerWidth - 10, window.innerHeight -10)
 
     // add cubes for frequency visualization
-    let cubes = addCubes(audioCtx.get('analyserNode'), scene)
+    let cubes = addCubes(scene, NUM_CUBES, OFFSET, WIDTH, COLOR)
 
     // add cube for tracking position in song
     let trackingCube = createCube(OFFSET, WIDTH/2, TRACKING_COLOR)
@@ -92,11 +97,14 @@ function updateTrackingCube(trackingCube, duration, position) {
 /**
  * adds all the cubes to the scene
  * @private
- * @param {AnalyserNode} analyserNode
  * @param {THREE.Scene} scene
+ * @param {number} num
+ * @param {number} offset
+ * @param {number} width
+ * @param {number} color
  * @returns {THREE.Mesh[]}
  */
-function addCubes(analyserNode, scene) {
+function addCubes(scene, num, offset, width, color) {
   let cubes = []
 
   for (let i = 0; i < NUM_CUBES; i++) {
@@ -136,7 +144,6 @@ function createCube(offset, width, color) {
  */
 function updateCube(cube, value, clockwise) {
   cube.scale.y = (value/255) * SCALE + INITIAL_HEIGHT
-  // cube.material.color.setHex(cube.material.color + 1)
 
   if (clockwise)
     cube.rotation.y += ROTATION_RATE

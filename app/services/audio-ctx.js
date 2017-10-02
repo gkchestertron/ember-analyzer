@@ -1,8 +1,14 @@
 import Ember from 'ember'
 import fxDefs from '../helpers/fx'
 
-const SMOOTHING      = 0.8
+/**
+ * constants
+ */
+const SMOOTHING = 0.8
 
+/**
+ * private vars - don't let anyone else touch this piece of state
+ */
 let PAUSED_AT  = 0
 let STARTED_AT = 0
 
@@ -20,6 +26,8 @@ export default Ember.Service.extend({
    * @param {number} diff - number of seconds to rewind
    */
   adjustTime(diff) {
+    let wasPlaying = this.get('playing')
+
     this.pause()
 
     // move pointer back
@@ -29,7 +37,9 @@ export default Ember.Service.extend({
     if (PAUSED_AT < 0)
       PAUSED_AT = 0
 
-    this.play()
+    // play if we were before
+    if (wasPlaying)
+      this.play()
   },
 
   /**
@@ -151,6 +161,7 @@ export default Ember.Service.extend({
  * @return {}
  */
 function buildAudioPath(numChannels, audioCtx) {
+  // using tuna library - see vendor
   let tuna = new Tuna(audioCtx)
 
   // create the analyserNode

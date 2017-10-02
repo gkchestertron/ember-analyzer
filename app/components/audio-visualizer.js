@@ -18,7 +18,7 @@ export default Ember.Component.extend({
     .then(bufferList => {
       // hack to set initial gains
       this.set('audioCtx.gains.0.gain.value', 0.25) // rhythm guitar
-      this.set('audioCtx.gains.1.gain.value', 0.3) // rhythm guitar
+      this.set('audioCtx.gains.1.gain.value', 0.3) // lead guitar
       this.set('audioCtx.gains.2.gain.value', 2) // vocal
 
       // create the visualizer and append it to the body
