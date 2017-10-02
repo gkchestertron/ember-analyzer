@@ -1,3 +1,7 @@
+/**
+ * definitions for tuna fx
+ * @todo put someplace sensible
+ */
 export default {
 	Chorus: {
 		rate                    : 1.5,                           // 0.01 to 8+

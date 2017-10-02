@@ -64,6 +64,7 @@ export default Ember.Service.extend({
 
   /**
    * get the duration of the tracks
+   * @returns {number}
    */
   getDuration() {
     return this.get('bufferList')[0].duration
@@ -71,6 +72,7 @@ export default Ember.Service.extend({
 
   /**
    * get current position of playback in seconds
+   * @returns {number}
    */
   getPosition() {
     if (this.get('playing'))
@@ -184,9 +186,14 @@ function buildAudioPath(numChannels, audioCtx) {
         chain[jdx - 1].connect(pedal.input)
     })
 
+    // connect to proper gain
     chain[chain.length - 1].connect(gains[idx])
+
+    // connect gain to merger
     gains[idx].connect(merger)
   })
+
+  // connect merger -> mainGain -> analyserNode
   merger.connect(mainGain)
   mainGain.connect(analyserNode)
   analyserNode.connect(audioCtx.destination)
@@ -198,6 +205,7 @@ function buildAudioPath(numChannels, audioCtx) {
  * creates an individual audio track
  * @private
  * @param {Buffer} buffer
+ * @param {AudioContext} audioCtx
  * @returns {AudioBufferSourceNode}
  */
 function createTrack(buffer, audioCtx) {
@@ -210,6 +218,7 @@ function createTrack(buffer, audioCtx) {
  * creates tracks to be played from a list of audio buffers
  * @private
  * @param {Buffer[]} bufferList - a list of buffers
+ * @param {AudioContext} audioCtx
  * @returns {AudioBufferSourceNode}[]} - an array of source nodes
  */
 function createTracks(bufferList, audioCtx) {

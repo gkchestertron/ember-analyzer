@@ -22,7 +22,6 @@ export default Ember.Component.extend({
       this.set('audioCtx.gains.2.gain.value', 2) // vocal
 
       // create the visualizer and append it to the body
-      // let visualizer = createVisualizer(this.get('audioCtx'))
       this.set('visualizer', Ember.inject.service('visualizer'))
       document.body.appendChild(this.get('visualizer.el'))
     })
@@ -64,6 +63,8 @@ export default Ember.Component.extend({
 
     /**
      * update gain node for track when slider changes
+     * @param {number} value
+     * @param {number} idx
      * @todo move this to the audioCtx - this is really ugly
      */
     sliderChanged(value, idx) {
@@ -71,7 +72,13 @@ export default Ember.Component.extend({
     },
   },
 
+  /**
+   * audio service
+   */
   audioCtx: Ember.inject.service('audio-ctx'),
 
+  /**
+   * visualizer service
+   */
   visualizer: Ember.inject.service('visualizer')
 })

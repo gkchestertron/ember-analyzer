@@ -15,12 +15,6 @@ const TRACKING_COLOR = 0xdd00ee
 const WIDTH          = TOTAL_WIDTH/NUM_CUBES
 
 export default Ember.Service.extend({
-  /**
-   * creates the 3d visualizer for the audio
-   * @private
-   * @param {Ember.Service} audioCtx - the audio context service
-   * @returns {Element}
-   */
   init() {
     // get the audio context
     let audioCtx = this.get('audioCtx')
