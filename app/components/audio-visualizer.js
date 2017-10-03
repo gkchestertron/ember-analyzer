@@ -15,19 +15,27 @@ export default Ember.Component.extend({
     ])
 
     // setup the visualizer
-    .then(bufferList => {
+    .then(() => {
+      let self = this
+
       // hack to set initial gains
       this.set('audioCtx.gains.0.gain.value', 0.25) // rhythm guitar
       this.set('audioCtx.gains.1.gain.value', 0.3) // lead guitar
       this.set('audioCtx.gains.2.gain.value', 2) // vocal
 
-      // create the visualizer and append it to the body
-      this.set('visualizer', Ember.inject.service('visualizer'))
+      // set loading flag
       this.set('loading', false)
-      setTimeout(() => {
-        document.body.appendChild(this.get('visualizer.el'))
-      }, 100)
+
+      // wait for webgl
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(self.get('visualizer.el'))
+        }, 100)
+      })
     })
+
+    // append visualizer el
+    .then(el => document.body.appendChild(el))
   },
 
   actions: {

@@ -1,3 +1,5 @@
+import Ember from 'ember'
+
 /**
  * helper for getting sum of two numbers
  */

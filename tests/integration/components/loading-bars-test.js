@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{loading-bars}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#loading-bars}}
-      template block text
-    {{/loading-bars}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'Loading Audio...');
 });

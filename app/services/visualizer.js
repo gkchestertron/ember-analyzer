@@ -109,7 +109,7 @@ function addCubes(scene, num, offset, width, color) {
 
   for (let i = 0; i < NUM_CUBES; i++) {
     let offset = OFFSET + (i * WIDTH)
-    let cube = createCube(offset, WIDTH/2,  COLOR + (i * 5))
+    let cube = createCube(offset, WIDTH/2,  color + (i * 5))
     scene.add(cube)
     cubes.push(cube)
   }

@@ -49,9 +49,7 @@ export default Ember.Service.extend({
    * @returns {Promise}
    */
   fetchBuffers(files) {
-    let self = this
-
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       let bufferLoader = new BufferLoader(this.get('ctx'), files, (bufferList) => resolve(bufferList))
       bufferLoader.load()
     })
@@ -173,7 +171,7 @@ function buildAudioPath(numChannels, audioCtx) {
   let merger = audioCtx.createChannelMerger(numChannels)
 
   // create and connect the gain nodes
-  let gains = Array(numChannels).fill().map((v,i) => {
+  let gains = Array(numChannels).fill().map(() => {
     let gain = audioCtx.createGain()
     return gain
   })
