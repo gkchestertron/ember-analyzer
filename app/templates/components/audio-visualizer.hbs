@@ -4,9 +4,9 @@
   <div id="top-controls">
     <button {{action "rewind"}}>&lt;&lt;</button>
     <button 
-      class="{{if audioCtx.playing "blue" "green"}}" 
+      class="{{if audioCtx.playing "pause blue" "play green"}}" 
       {{action "togglePlay"}}>{{if audioCtx.playing "pause" "play"}}</button>
-    <button class="red" {{action "stop"}}>stop</button>
+    <button class="red stop" {{action "stop"}}>stop</button>
     <button {{action "fastForward"}}>&gt;&gt;</button>
   </div>
 
