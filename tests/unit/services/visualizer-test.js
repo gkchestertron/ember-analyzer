@@ -1,3 +1,4 @@
+/**
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember'
 
@@ -14,6 +15,7 @@ const audioCtxStub =  Ember.Service.extend({
     { gain: { value: 1 } }
   ]
 })
+*/
 
 /**
  * @todo figure out how to test three.js in qunit - webgl throws error "Cannot read property 'getExtension' of null"
