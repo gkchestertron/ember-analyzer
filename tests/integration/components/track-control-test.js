@@ -26,7 +26,6 @@ moduleForComponent('track-control', 'Integration | Component | track control', {
 })
 
 test('it renders', function(assert) {
-  // Handle any actions with this.on('myAction', function(val) { ... })
   this.set('fx', this.get('audioCtx.fx.0'))
 
   this.render(hbs`{{track-control idx=0 fx=fx audioCtx=audioCtx}}`)
